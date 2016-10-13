@@ -97,10 +97,13 @@ Using Git
             - There's no need to keep it, since we can download all the dependencies we need whenever we want
         - .gitignore
             - Changes in files/folders that you want git to.....ignore
-        - To commit all files with a commit message:
+        - To commit all files (that git knows about), and with a commit message:
             - git commit -a -m "<message>"
     - Using git makes it easier to deploy files, etc.
     
+
+Project: Server Middleware
+    - 
 
 
                                   Examples
