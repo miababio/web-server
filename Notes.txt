@@ -89,6 +89,17 @@ Using Git
         - "git status"
     - To add files to git
         - "git add ."
+        - Uh oh! This adds EVERY file in the folder, including subfolders!
+            - It added all the extra stuff in node_modules we dont need committed!
+        - To revert the adding of files, use:
+            "git rm --cached -r <file/folder you want removed from cache>"
+            - Removes it from the cache
+            - There's no need to keep it, since we can download all the dependencies we need whenever we want
+        - .gitignore
+            - Changes in files/folders that you want git to.....ignore
+        - To commit all files with a commit message:
+            - git commit -a -m "<message>"
+    - Using git makes it easier to deploy files, etc.
     
 
 
