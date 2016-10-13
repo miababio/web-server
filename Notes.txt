@@ -1,0 +1,167 @@
+                                    NOTES
+                                    -----
+                                    
+Hello Express.js (Using 4.13.2, latest is 4.14.0)
+    - Popular npm module
+    - Helps create web servers and HTTP requests easily
+    - Small example to display "Hello Express!" to people who visit the page
+    
+    - var express = require("express");
+      var app = express();
+
+      app.get("/", function(req, res) {
+          res.send("Hello Express!");
+      });
+      app.listen(3000);
+      
+        - var app = express(); -> initializes Express
+        - app.get(<root URL>, <anonymous function>(req, res) { 
+            // response code goes in here
+          });
+            - get -> REST method; All webpages behind the scenes use a GEt method to obtain/display the website info
+            - first part is root url, could be a help page (/help), an about page (/about), etc
+            - req -> request, contains the info (url, json passed, cookies, etc)
+            - res -> response, response you want to send back
+        - app.listen(<port_number>) -> Port you want the server to listen in on
+        - to see the results, open up a web browser and type "localhost:<port_number you're listening on>
+    - The whole app.get() method is called a Route
+                                             -----
+    - Challenge - add an "About" route
+        - See Example 1
+        
+Setting Up Static Websites
+    - When designing sites, most of the time you'll have folders that people can access to see the page
+        - Ex: "public" folder which contains index.html, etc.
+    - We need to tell Express to "expose" those folders so that we can access them
+    - use the use() method
+        - Ex: app.use(express.static(<full path to your folder>));
+        - Problem is that you have to pass in the absolute path-it doesn't do relative paths!
+        - folder paths can be long!
+            - Solution: NodeJS has a "__dirname" keyword that returns the absolute path of the folder
+            - doing it on this folder right now gets me:
+                - C:\Users\moa003\Desktop\The Complete Node JS Developer Course\5 - Creating A Web Server
+    - So the final line would be -> app.use(express.static(__dirname + "/public"));
+        - once added, you can just navigate to "localhost:3000/index.html"
+        - You can also call it implicitly (since its a default page) "localhost:3000"
+        
+Middleware is Awesome (Express Middleware)
+    - Middleware -> let's you run some, or all of your routes
+        - Application-level Middleware - runs for every route 
+        - Route-level Middleware - runs only on the ones you specify
+        - See Example 2 (Application Middleware)
+            - Since the body of requireAuthentication is going to be fun first, before the "/about" and whatnot below, the "next" parameter tells Express to move on
+                - Ex: if a user is already logged in, you can call "next" and then run the route's specific function. If you don't, you can throw an error and prevent the user from accessing the privat e information.
+            - Add middleware to the app using app.use() (see below)
+                - ORDER MATTERS! If you put that app.use() call below the "/about" route, it would never run
+                    - Make sure your middleware stuff is at the top
+            - When using app.use, you're using Application Middleware!
+                - It's going to be called for every page requested, and every route hit (console.log msg in this case)
+        - You can add middleware to specific routes as well (Route-Level Middleware)
+            - Has to be the second argument
+            
+            - Ex: var middleware = {
+                     requireAuthentication: function(req, res, next) {
+                     console.log("Private route hit!");
+                     next();
+                  };
+                  app.get("/about", middleware.requireAuthentication, function(req, res) {
+                     res.send("About Us");
+                  });
+                  
+        - Another Middleware example
+            - See Example 3
+                - you can use "req.method" to show you the the of request being requested, and "req.originalUrl" to display the url of where the request comes from
+                    - Note: refresh the page, you get "GET /"; if you do a hard reset in Chrome (Ctrl+Shift+R), you get
+                        - "GET /"
+                        - "GET /favicon.ico"
+                    - These two get everything needed to produce the page. favicon is the little icon used next to your tab
+                
+Using Git
+    - Form of version control
+    - Settings used:
+        - git config --global user.name "Michael Ababio"
+        - git config --global user.email "miababio@gmail.com"
+        - git config --global push.default matching
+        - git config --global alias.co checkout
+    - To create a repository in the folder:
+        - "git init"
+    - Check the status of your files
+        - "git status"
+    - To add files to git
+        - "git add ."
+    
+
+
+                                  Examples
+                                  --------
+                            
+Example 1 - Challenge -> Add an "About" route
+---------
+var express = require("express");
+var app = express();
+
+app.get("/about", function(req, res) {
+    res.send("About Us");
+});
+
+app.listen(3000); //listen to a port
+
+- Access result by opening "localhost:3000/about"
+
+
+Example 2 - Application Middleware Example
+---------
+var express = require("express");
+var app = express();
+var PORT = 3000;
+
+var middleware = {
+    requireAuthentication: function(req, res, next) {
+        console.log("Private route hit!");
+        next();
+    }
+};
+
+app.use(middleware.requireAuthentication);
+
+app.get("/about", function(req, res) {
+    res.send("About Us");
+});
+
+app.use(express.static(__dirname + "/public"));
+
+app.listen(PORT, function() {
+    console.log("Express server started on port " + PORT + "!");
+});
+
+In Chrome -> "localhost:3000", + the other pages to see "Private route hit!" in the console
+
+
+Example 3 - Another Middleware Example (logger)
+---------
+var express = require("express");
+var app = express();
+var PORT = 3000;
+
+var middleware = {
+    requireAuthentication: function(req, res, next) {
+        console.log("Private route hit!");
+        next();
+    },
+    logger: function(req, res, next) {
+        console.log(req.method + " " + req.originalUrl);
+        next();
+    } 
+};
+
+app.use(middleware.logger);
+
+app.get("/about", middleware.requireAuthentication, function(req, res) {
+    res.send("About Us");
+});
+
+app.use(express.static(__dirname + "/public"));
+
+app.listen(PORT, function() {
+    console.log("Express server started on port " + PORT + "!");
+});
