@@ -18,7 +18,7 @@ Hello Express.js (Using 4.13.2, latest is 4.14.0)
         - app.get(<root URL>, <anonymous function>(req, res) { 
             // response code goes in here
           });
-            - get -> REST method; All webpages behind the scenes use a GEt method to obtain/display the website info
+            - get -> REST method; All webpages behind the scenes use a GET method to obtain/display the website info
             - first part is root url, could be a help page (/help), an about page (/about), etc
             - req -> request, contains the info (url, json passed, cookies, etc)
             - res -> response, response you want to send back
@@ -102,7 +102,11 @@ Using Git
     - Using git makes it easier to deploy files, etc.
     
 
-Project: Server Middleware
+Generate SSH, Join Heroku & GitHub
+    - Need to do some tedious tasks initially
+    - Generate SSH -> Helps us validate our files/information for places like Heroku and GitHub
+    - GitHub - Place to hold code/work with others
+    - Heroku - Place to deploy our apps on the web
     - 
 
 
