@@ -107,8 +107,36 @@ Generate SSH, Join Heroku & GitHub
     - Generate SSH -> Helps us validate our files/information for places like Heroku and GitHub
     - GitHub - Place to hold code/work with others
     - Heroku - Place to deploy our apps on the web
+    - Need to generate SSH keys to link your ocmputer with GitHub and Heroku
+    - To check if you already have keys generated on your computer:
+        - "ls -al ~/.ssh"
+        - Will display some files; If you have "id_rsa" and "id_rsa.pub" then you have generated keys
+    - If not, generate some ssh keys by typing the following in Git Bash:
+        - "ssh-keygen -t rsa -b 4096 -C "<email you're ost likey to use"
+            - Will ask you questions (rename files, passphrase, etc. can leave blank)
+            - This generates a new public/private RSA key pair
+            - will be located in your .ssh folder (id_rsa, id_rsa.pub)
+    - GitHub/Heroku
+        - Navigate to where you can add SSH keys
+        - Copy and paste from the id_rsa.pub file
+            - NOTE: You should NEVER sshow the private key, ANYWHERE. Only use the PUBLIC (.pub) key
+            - If you lose the private key, or the keys become inactive after a while, generate new ones
+    - GitHub
+        - After adding keys, add the repository
+        - Click the green "Add A Repository" button on the right
+            - Give it a name (ex: web-server)
+            - Since we have an exisitng repo (on our computer), we just have to push it to github
+                - "git remote add origin <git@github.com:whatever ssh link it gives you>"
+                - "git push -u origin master"
+            - Can check that it worked by doing:
+                - "git remote" // displays origin 
+                           OR
+                - "git remote -v" // displays remote URL commands (v = verbose)
+            - Fetch = getting, push = saving
+            
+            
+Deploying your Application
     - 
-
 
                                   Examples
                                   --------
