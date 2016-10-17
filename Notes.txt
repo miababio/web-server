@@ -112,7 +112,7 @@ Generate SSH, Join Heroku & GitHub
         - "ls -al ~/.ssh"
         - Will display some files; If you have "id_rsa" and "id_rsa.pub" then you have generated keys
     - If not, generate some ssh keys by typing the following in Git Bash:
-        - "ssh-keygen -t rsa -b 4096 -C "<email you're ost likey to use"
+        - "ssh-keygen -t rsa -b 4096 -C "<email you're most likey to use"
             - Will ask you questions (rename files, passphrase, etc. can leave blank)
             - This generates a new public/private RSA key pair
             - will be located in your .ssh folder (id_rsa, id_rsa.pub)
