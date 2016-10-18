@@ -136,7 +136,17 @@ Generate SSH, Join Heroku & GitHub
             
             
 Deploying your Application
-    - 
+    - "heroku create" in project directory in cmd -> Creates a Heroku app just like that!
+        - Generates a link to your newly created app
+    - You can run "heroku open" after to view your new app
+    - Push code to heroku so it can be deployed to the web
+        - When we did "heroku create", it added a fetch and push command to a remote repo in Heroku
+            - Same concept as pushing to the remote repo in GitHub, just with heroku
+            - You can see this if you do "git remote -v"
+        - Heroku comes with its own port environment, so in server.js, we change the line to
+            - var PORT = process.env.PORT || 3000;
+                - if the port environment exists, that's what it'll be, else it'll be 3000 (which happens on our local computers)
+        - 
 
                                   Examples
                                   --------
