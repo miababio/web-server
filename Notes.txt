@@ -146,7 +146,14 @@ Deploying your Application
         - Heroku comes with its own port environment, so in server.js, we change the line to
             - var PORT = process.env.PORT || 3000;
                 - if the port environment exists, that's what it'll be, else it'll be 3000 (which happens on our local computers)
-        - 
+        - Push to Heroku -> "git push heroku <branch>"
+            - In this case: "git push heroku master"
+        - Your code is now live on the web after pushing to Heroku (yay!)
+    - If you do "heroku open" again, or refresh the page if you still have it, you see it runs our web-server code!
+        - https://vast-eyrie-19420.herokuapp.com/ is the site
+        - Actually running on the web! Not on localhost anymore :)
+    - 
+        
 
                                   Examples
                                   --------
