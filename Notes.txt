@@ -152,7 +152,11 @@ Deploying your Application
     - If you do "heroku open" again, or refresh the page if you still have it, you see it runs our web-server code!
         - https://vast-eyrie-19420.herokuapp.com/ is the site
         - Actually running on the web! Not on localhost anymore :)
-    - 
+    - Can rename App urls:
+        - heroku rename <new name>
+            - has naming conventions...look later
+            - This helps when distinguishing apps
+    
         
 
                                   Examples
